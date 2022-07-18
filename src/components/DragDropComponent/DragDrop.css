@@ -1,0 +1,61 @@
+.drag-drop {
+  width: 84%;
+  box-sizing: border-box;
+  height: 218.9px;
+  background: #f6f8fb;
+  border: 1px dashed #97bef4;
+  border-radius: var(--container-border-radius);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#input-file-upload {
+  display: none;
+}
+.icon-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.drag-drop-Icon {
+  margin-top: 36px;
+  margin-bottom: 37px;
+}
+.drag-drop-instructions {
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  letter-spacing: var(--letter-spacing);
+  color: var(--color);
+}
+.drag-drop-text {
+  margin-top: 19px;
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  letter-spacing: var(--letter-spacing);
+  color: var(--color);
+}
+.drag-drop-button {
+  margin-top: 22px;
+  margin-bottom: 36px;
+  width: 101px;
+  height: var(--button-height);
+  color: var(--button-color);
+  font-family: var(--button-font-family);
+  background: var(--button-background);
+  border-radius: var(--button-border-radius);
+  border: var(--button-border);
+  cursor: var(--button-cursor);
+}
+#form-file-upload.drag-active {
+  background-color: #ffffff;
+}
+#drag-file-element {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 1rem;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+}

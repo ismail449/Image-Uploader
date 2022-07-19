@@ -1,7 +1,6 @@
 import React, { useState, useRef } from 'react';
+import { upload } from '../upload';
 import UploadImage from '../../assets/image.svg';
-import { storage } from '../../firebase';
-import { ref, uploadBytes } from 'firebase/storage';
 import './DragDrop.css';
 
 const DragDrop = () => {
@@ -21,13 +20,15 @@ const DragDrop = () => {
     e.stopPropagation();
     setDragActive(false);
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      console.log(e.dataTransfer.files);
+      console.log(e.dataTransfer.files[0]);
+      upload(e.dataTransfer.files[0]);
     }
   };
   const handleChange = (e) => {
     e.preventDefault();
     if (e.target.files && e.target.files[0]) {
       console.log(e.target.files);
+      upload(e.target.files[0]);
     }
   };
   const onButtonClick = () => {

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux/es/exports';
 import ImageUploader from './components/ImageUploadComponent/ImageUploader';
+import Loader from './components/LoaderComponent/Loader';
 import './App.css';
 
 function App() {
@@ -8,7 +9,7 @@ function App() {
   return (
     <div className="App">
       <div className="background">
-        {upload ? <p>Loading</p> : <ImageUploader />}
+        {upload ? <Loader /> : <ImageUploader />}
       </div>
     </div>
   );

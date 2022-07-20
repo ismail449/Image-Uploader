@@ -1,11 +1,54 @@
 import React, { useState, useRef } from 'react';
-import { upload } from '../upload';
+import { useDispatch } from 'react-redux';
+import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import { setUpload, setUrl } from '../../redux/features/uploadSlice';
+import { storage } from '../../firebase';
 import UploadImage from '../../assets/image.svg';
 import './DragDrop.css';
 
 const DragDrop = () => {
   const [dragActive, setDragActive] = useState(false);
+  const dispatch = useDispatch();
   const inputRef = useRef(null);
+  const upload = (file) => {
+    // Create the file metadata
+    /** @type {any} */
+    const metadata = {
+      contentType: file.type,
+    };
+
+    // Upload file and metadata to the object 'images/mountains.jpg'
+    const storageRef = ref(storage, 'images/' + file.name);
+    const uploadTask = uploadBytesResumable(storageRef, file, metadata);
+
+    // Listen for state changes, errors, and completion of the upload.
+    uploadTask.on(
+      'state_changed',
+      () => {},
+      (error) => {
+        switch (error.code) {
+          case 'storage/unauthorized':
+            // User doesn't have permission to access the object
+            break;
+          case 'storage/canceled':
+            // User canceled the upload
+            break;
+          case 'storage/unknown':
+            // Unknown error occurred, inspect error.serverResponse
+            break;
+        }
+      },
+      () => {
+        // Upload completed successfully, now we can get the download URL
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          console.log('File available at', downloadURL);
+          dispatch(setUrl(downloadURL));
+          dispatch(setUpload(false));
+        });
+      },
+    );
+  };
+
   const handleDrag = (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -20,14 +63,14 @@ const DragDrop = () => {
     e.stopPropagation();
     setDragActive(false);
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      console.log(e.dataTransfer.files[0]);
+      dispatch(setUpload(true));
       upload(e.dataTransfer.files[0]);
     }
   };
   const handleChange = (e) => {
     e.preventDefault();
     if (e.target.files && e.target.files[0]) {
-      console.log(e.target.files);
+      dispatch(setUpload(true));
       upload(e.target.files[0]);
     }
   };

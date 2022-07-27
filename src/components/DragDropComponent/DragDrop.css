@@ -34,18 +34,7 @@
   letter-spacing: var(--letter-spacing);
   color: var(--color);
 }
-.drag-drop-button {
-  margin-top: 22px;
-  margin-bottom: 36px;
-  width: 101px;
-  height: var(--button-height);
-  color: var(--button-color);
-  font-family: var(--button-font-family);
-  background: var(--button-background);
-  border-radius: var(--button-border-radius);
-  border: var(--button-border);
-  cursor: var(--button-cursor);
-}
+
 #form-file-upload.drag-active {
   background-color: #ffffff;
 }
@@ -58,4 +47,9 @@
   right: 0px;
   bottom: 0px;
   left: 0px;
+}
+
+.button-container {
+  margin-top: 22px;
+  margin-bottom: 36px;
 }

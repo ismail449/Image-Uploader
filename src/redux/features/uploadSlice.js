@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   upload: false,
-  url: ''
+  url: '',
+  error: ''
 };
 
 const uploadSlice = createSlice({
@@ -15,8 +16,11 @@ const uploadSlice = createSlice({
     setUrl: (state, action)=>{
       state.url = action.payload;
     },
+    setError: (state, action) =>{
+      state.error = action.payload
+    }
   }
 });
 
-export const { setUpload, setUrl } = uploadSlice.actions;
+export const { setUpload, setUrl, setError } = uploadSlice.actions;
 export default uploadSlice.reducer

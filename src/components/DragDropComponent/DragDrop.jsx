@@ -1,7 +1,8 @@
 import React, { useState, useRef } from 'react';
 import { useDispatch } from 'react-redux';
+import Button from '../ButtonComponent/Button';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
-import { setUpload, setUrl } from '../../redux/features/uploadSlice';
+import { setUpload, setUrl, setError } from '../../redux/features/uploadSlice';
 import { storage } from '../../firebase';
 import UploadImage from '../../assets/image.svg';
 import './DragDrop.css';
@@ -28,20 +29,21 @@ const DragDrop = () => {
       (error) => {
         switch (error.code) {
           case 'storage/unauthorized':
-            // User doesn't have permission to access the object
+            dispatch(
+              setError("User doesn't have permission to access the object"),
+            );
             break;
           case 'storage/canceled':
-            // User canceled the upload
+            dispatch(setError('User canceled the upload'));
             break;
-          case 'storage/unknown':
-            // Unknown error occurred, inspect error.serverResponse
+          default:
+            dispatch(setError('Error'));
             break;
         }
       },
       () => {
         // Upload completed successfully, now we can get the download URL
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          console.log('File available at', downloadURL);
           dispatch(setUrl(downloadURL));
           dispatch(setUpload(false));
         });
@@ -116,9 +118,9 @@ const DragDrop = () => {
       </form>
 
       <span className="drag-drop-text">Or</span>
-      <button onClick={onButtonClick} className="drag-drop-button">
-        Choose a file
-      </button>
+      <div className="button-container">
+        <Button onClick={onButtonClick} text="Choose a file" />
+      </div>
     </>
   );
 };

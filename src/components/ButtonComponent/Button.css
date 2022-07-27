@@ -1,0 +1,10 @@
+.button {
+  width: 101px;
+  height: var(--button-height);
+  color: var(--button-color);
+  font-family: var(--button-font-family);
+  background: var(--button-background);
+  border-radius: var(--button-border-radius);
+  border: var(--button-border);
+  cursor: var(--button-cursor);
+}

@@ -4,6 +4,7 @@ import ImageUploader from './components/ImageUploadComponent/ImageUploader';
 import Loader from './components/LoaderComponent/Loader';
 import Image from './components/ImageComponent/Image';
 import Error from './components/ErrorComponent/Error';
+import Footer from './components/FooterComponent/Footer';
 import './App.css';
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <ImageUploader />
         )}
       </div>
+      <Footer />
     </div>
   );
 }

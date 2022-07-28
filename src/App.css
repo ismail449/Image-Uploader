@@ -23,3 +23,9 @@
   border-radius: var(--container-border-radius);
   width: 400px;
 }
+
+@media screen and (max-width: 600px) {
+  .background {
+    width: 90%;
+  }
+}
